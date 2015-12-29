@@ -14,6 +14,6 @@ App to view estimates of the occupancies of specific buildings on Georgia Tech's
 ## Installation Instructions
 
 1. Install your Node dependencies: `npm install`
-2. Install your frontend dependencies: 'bower install'
-3. Start the application `gulp`
+2. Install your frontend dependencies: `bower install`
+3. Start the application: `gulp`
 4. Visit the application in your browser: [http://localhost:8080](http://localhost:8080)
