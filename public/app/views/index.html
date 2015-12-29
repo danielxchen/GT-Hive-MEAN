@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GT Hive</title>
+
+	<!-- FOR ANGULAR ROUTING -->
+	<base href="/">
+
+	<!-- CSS  -->
+	<link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<!-- JS -->
+	<script src="assets/libs/angular/angular.js"></script>
+	<script src="assets/libs/angular-route/angular-route.min.js"></script>
+	<script src='assets/libs/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+	<script src='assets/libs/lodash/lodash.min.js'></script>
+	<script src='assets/libs/angular-google-maps/dist/angular-google-maps.js'></script>
+
+	<!-- controllers -->
+	<script src="app/controllers/mainCtrl.js"></script>
+
+	<!-- services -->
+	<script src="app/services/buildingService.js"></script>
+
+	<!-- main Angular app files -->
+	<script src="app/app.routes.js"></script>
+	<script src="app/app.js"></script>
+
+</head>
+
+<body ng-app="gthiveApp" ng-controller="mainController as main">
+
+<!-- NAVBAR -->
+<header>
+	<div class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="/" class="navbar-brand">GT Hive</a>
+			</div>	
+		</div>
+	</div>
+</header>
+
+<main class="container">
+	<!-- ANGULAR VIEWS -->
+	<div ng-view></div>
+</main>
+
+</body>
+</html>

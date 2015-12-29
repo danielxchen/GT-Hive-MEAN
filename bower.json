@@ -1,0 +1,31 @@
+{
+  "name": "gt-hive",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Daniel <daniel.xia.chen@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/brentzucker/GT-Hive",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-google-maps": "~2.2.1",
+    "lodash": "~3.10.1",
+    "angular-simple-logger": "~0.1.5"
+  },
+  "resolutions": {
+    "angular-simple-logger": "~0.0.1"
+  }
+}

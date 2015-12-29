@@ -1,0 +1,8 @@
+{
+  "name": "gt-hive",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.2.8"
+  }
+}
