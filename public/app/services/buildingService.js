@@ -24,7 +24,7 @@ angular.module('buildingService', [])
 		//$log.log(str);
 
 		return $http.get('/api/locationinfo/' + str);
-	}
+	};
 
 	return buildingFactory;
 });

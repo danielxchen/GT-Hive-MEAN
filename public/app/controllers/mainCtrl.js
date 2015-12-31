@@ -47,17 +47,17 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 			// Set color
 			if (building.occupancy <= 40)
-				marker['icon'] = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 			else if (building.occupancy <= 80)
-				marker['icon'] = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
 			else
-				marker['icon'] = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
 
 			return marker;
-		}
+		};
 
-		for (var i = 0; i < vm.buildings.length; i++) {
+		for (i = 0; i < vm.buildings.length; i++) {
 			$scope.markers.push(createMarker(i, vm.buildings[i]));
 		}
-    });	
+    });
 });

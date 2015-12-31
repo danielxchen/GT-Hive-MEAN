@@ -14,7 +14,7 @@ gulp.task('lint', function() {
 });
 
 // task to concatenate and minify frontend angular files
-gulp.task('angular', function() {
+gulp.task('minify', function() {
   return gulp.src(['public/app/*.js', 'public/app/**/*.js'])
     .pipe(ngAnnotate())
     .pipe(concat('app.js'))
@@ -24,17 +24,18 @@ gulp.task('angular', function() {
 
 // watch files to run tasks on changes 
 gulp.task('watch', function() {
-  gulp.watch(['server.js', 'public/app/*.js', 'public/app/**/*.js'], ['lint', 'angular']);
+  gulp.watch(['server.js', 'public/app/*.js', 'public/app/**/*.js'], ['lint', 'minify']);
 });
 
 // start the server 
 gulp.task('nodemon', function() {
   nodemon({
     script: 'server.js',
-    ext: 'js css html'
+    ext: 'js css html',
+    env: { 'NODE_ENV': 'development' },
+    ignore: ['public/dist/*'],
+    tasks: ['lint', 'minify']
   })
-    .on('start', ['watch'])
-    .on('change', ['watch'])
     .on('restart', function() {
       console.log('Restarted!');
     });
