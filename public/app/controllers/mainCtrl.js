@@ -22,21 +22,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 	}).then(function(response) {
 		vm.buildings = response.data;
 
-		var bids = [];
-
-		for (var i = 0; i < vm.buildings.length; i++) {
-			bids.push(vm.buildings[i].bid);
-		}
-
-		return Building.updateOccupancies(bids);
-
-	}).then(function(updated) {
-		for (var i = 0; i < vm.buildings.length; i++) {
-			vm.buildings[i].occupancy = updated.data.occupancies[vm.buildings[i].bid].occupancy;
-		}
-
-		vm.processing = false;
-
+		// Create marker for a building
 		var createMarker = function(i, building) {
 			var marker = {
 				id: i,
@@ -56,8 +42,16 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 			return marker;
 		};
 
-		for (i = 0; i < vm.buildings.length; i++) {
+		// Create markers for all of the buildings
+		for (var i = 0; i < vm.buildings.length; i++) {
 			$scope.markers.push(createMarker(i, vm.buildings[i]));
 		}
+
+	}).catch(function() {
+		// log an error
+
+	}).then(function() {
+		
+		vm.processing = false;
     });
 });
