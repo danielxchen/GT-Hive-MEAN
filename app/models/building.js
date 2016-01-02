@@ -7,9 +7,9 @@ var BuildingSchema = new Schema({
 	bid: Number,
 	occupancy: Number,
 	capacity: Number,
-	floors: [Number],
 	latitude: Number,
-	longitude: Number
-});
+	longitude: Number },
+	{ timestamps: true } 
+);
 
 module.exports = mongoose.model('Building', BuildingSchema);
