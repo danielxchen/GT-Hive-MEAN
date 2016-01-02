@@ -1,6 +1,2 @@
-cache/
 node_modules/*
 libs/
-buildings.txt
-rooms.txt
-floors.txt
