@@ -1,4 +1,9 @@
 var CronJob = require('cron').CronJob;
+var Promise = require("bluebird");
+var Building = require('../models/building');
+Promise.promisifyAll(require("request"));
+Promise.promisifyAll(Building);
+Promise.promisifyAll(Building.prototype);
 
 module.exports = new CronJob('* * * * * *', function() {
 
