@@ -6,7 +6,7 @@ var Building = require('./models/building');
 Promise.promisifyAll(Building);
 Promise.promisifyAll(Building.prototype);
 
-module.exports = new CronJob('* */5 * * * *', function() {
+module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
 
 	// Get the current occupancy of the building 
@@ -17,7 +17,7 @@ module.exports = new CronJob('* */5 * * * *', function() {
 
   	}).then(function(parsed) {
   		// Update the building's occupancy
-  		return Building.findOneAndUpdateAsync({ bid: 166 }, { $set: { occupancy:parsed.occupancy } }, { new: true });
+  		return Building.findOneAndUpdateAsync({ bid: 166 }, { $set: { occupancy: parsed.occupancy } }, { new: true });
 
   	}).then(function(doc) {
   		// We got the updated document
