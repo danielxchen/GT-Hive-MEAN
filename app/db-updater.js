@@ -9,23 +9,30 @@ Promise.promisifyAll(Building.prototype);
 module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
 
-	// Get the current occupancy of the building 
-  	var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=166';
-  	request.getAsync(url).then(function(res) {
-  		// Parse the response into JSON
-  		return JSON.parse(res.body);
+	// Array of bids
+	var bids = [160, 166, 77, 12, 153, 50, 81, 85, 55, 114];
 
-  	}).then(function(parsed) {
-  		// Update the building's occupancy
-  		return Building.findOneAndUpdateAsync({ bid: 166 }, { $set: { occupancy: parsed.occupancy } }, { new: true });
+	// Base url
+	var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=';
 
-  	}).then(function(doc) {
-  		// We got the updated document
-  		console.log(doc);
+	bids.forEach(function(bid) {
+		// Get the current occupancy of the building 
+	  	request.getAsync(url + bid).then(function(res) {
+	  		// Parse the response into JSON
+	  		return JSON.parse(res.body);
 
-  	}).catch(function(err) {
-  		// Catch any error that happened along the way
-  		console.log('Error occured:', err);
-  	});
+	  	}).then(function(parsed) {
+	  		// Update the building's occupancy
+	  		return Building.findOneAndUpdateAsync({ bid: bid }, { $set: { occupancy: parsed.occupancy } }, { new: true });
 
-}, null, true, 'America/New_York');
+	  	}).then(function(doc) {
+	  		// We got the updated document
+	  		console.log(doc.name, 'updated!');
+
+	  	}).catch(function(err) {
+	  		// Catch any error that happened along the way
+	  		console.log('Error occured:', err);
+	  	});
+	});
+	
+}, null, false, 'America/New_York');
