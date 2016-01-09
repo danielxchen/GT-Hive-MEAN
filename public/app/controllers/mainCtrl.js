@@ -14,7 +14,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
     	$scope.map = {
 	  		center: { latitude: 33.7753, longitude: -84.3975 },
-	  		zoom: 16
+	  		zoom: 16,
+	  		options: { disableDefaultUI: true }
 		};
 
 		return Building.all();
@@ -26,7 +27,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		var createMarker = function(i, building) {
 			var marker = {
 				id: i,
-				title: building.name,
+				options: { title: building.name, labelContent: building.name },
 				latitude: building.latitude,
 				longitude: building.longitude
 			};

@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 // UPDATE DATABASE EVERY 5 MIN ========
 // ====================================
 var dbUpdater = require('./app/db-updater');
-dbUpdater.start();
+// dbUpdater.start();
 
 // ROUTES FOR OUR API =================
 // ====================================
