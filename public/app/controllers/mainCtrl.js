@@ -12,10 +12,27 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
     // The "then" callback function provides the google.maps object.
     uiGmapGoogleMapApi.then(function(maps) {
 
+    	// Styling of the map 
+    	var styles = [
+    	  {
+    	    featureType: "poi",
+    	    elementType: "labels",
+    	    stylers: [
+    	      { visibility: "off" }
+    	    ]
+    	  }, {
+    	    featureType: "poi.park",
+    	    elementType: "labels",
+    	    stylers: [
+    	      { visibility: "on" }
+    	    ]
+    	  }
+    	];
+
     	$scope.map = {
 	  		center: { latitude: 33.7753, longitude: -84.3975 },
 	  		zoom: 16,
-	  		options: { disableDefaultUI: true }
+	  		options: { disableDefaultUI: true, styles: styles }
 		};
 
 		return Building.all();
