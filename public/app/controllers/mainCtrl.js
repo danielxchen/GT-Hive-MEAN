@@ -67,6 +67,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 	}).catch(function() {
 		// log an error
+		$log.log('Error occurred, see logs.');
 
 	}).then(function() {
 		
