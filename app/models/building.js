@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 // building schema 
 var BuildingSchema = new Schema({
 	name: String,
+	abbreviation: String,
 	bid: Number,
 	occupancy: Number,
 	capacity: Number,

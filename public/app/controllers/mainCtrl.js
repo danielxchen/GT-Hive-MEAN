@@ -44,7 +44,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		var createMarker = function(i, building) {
 			var marker = {
 				id: i,
-				options: { title: building.name, labelContent: building.name },
+				options: { title: building.name, labelContent: building.abbreviation },
 				latitude: building.latitude,
 				longitude: building.longitude
 			};
