@@ -6,9 +6,7 @@ angular.module('app.routes', ['ngRoute'])
 
 		// route for the home page
 		.when('/', {
-			templateUrl : 'app/views/pages/home.html',
-			controller  : 'mainController',
-			controllerAs: 'main'
+			templateUrl : 'app/views/pages/home.html'
 		});
 
 	$locationProvider.html5Mode(true);

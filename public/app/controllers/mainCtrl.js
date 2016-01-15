@@ -3,36 +3,46 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 .controller('mainController', function($scope, uiGmapGoogleMapApi, Building, $log) {
 
 	var vm = this;
+	
+	vm.processing  = true;
 
 	$scope.markers = [];
 
-	vm.processing  = true;
+	$scope.selectedMarker = {};
+
+	$scope.windowOptions = {
+	    show: false
+	};
+
+	$scope.mapOptions = {
+        disableDefaultUI: true,
+        styles: [{
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [{
+                visibility: "off"
+            }]
+        }, {
+            featureType: "poi.park",
+            elementType: "labels",
+            stylers: [{
+                visibility: "on"
+            }]
+        }]
+    };
+
+    $scope.closeClick = function() {
+        $scope.windowOptions.show = false;
+    };
 
 	// uiGmapGoogleMapApi is a promise.
     // The "then" callback function provides the google.maps object.
     uiGmapGoogleMapApi.then(function(maps) {
 
-    	// Styling of the map 
-    	var styles = [
-    	  {
-    	    featureType: "poi",
-    	    elementType: "labels",
-    	    stylers: [
-    	      { visibility: "off" }
-    	    ]
-    	  }, {
-    	    featureType: "poi.park",
-    	    elementType: "labels",
-    	    stylers: [
-    	      { visibility: "on" }
-    	    ]
-    	  }
-    	];
-
     	$scope.map = {
 	  		center: { latitude: 33.7753, longitude: -84.3975 },
 	  		zoom: 16,
-	  		options: { disableDefaultUI: true, styles: styles }
+	  		options: $scope.mapOptions
 		};
 
 		return Building.all();
@@ -44,9 +54,11 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		var createMarker = function(i, building) {
 			var marker = {
 				id: i,
-				options: { title: building.name, labelContent: building.abbreviation },
-				latitude: building.latitude,
-				longitude: building.longitude
+				coords: {
+		            latitude: building.latitude,
+		            longitude: building.longitude
+		        },
+				options: { title: building.name, labelContent: building.abbreviation }
 			};
 
 			// Set color
@@ -56,6 +68,14 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
 			else
 				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+			// Add onClick
+			marker.onClick = function() {
+				$log.log(marker.options.title + ' clicked!');
+				$scope.windowOptions.show = true;
+				$scope.selectedMarker = marker;
+				$scope.$apply();
+			};
 
 			return marker;
 		};
@@ -70,7 +90,6 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		$log.log('Error occurred, see logs.');
 
 	}).then(function() {
-		
 		vm.processing = false;
     });
 });
