@@ -11,8 +11,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 	$scope.selectedMarker = {};
 
 	$scope.windowOptions = {
-	    show: false
-	};
+		show: false
+	}
 
 	$scope.mapOptions = {
         disableDefaultUI: true,
@@ -42,7 +42,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
     	$scope.map = {
 	  		center: { latitude: 33.7753, longitude: -84.3975 },
 	  		zoom: 16,
-	  		options: $scope.mapOptions
+	  		options: $scope.mapOptions,
 		};
 
 		return Building.all();
@@ -72,9 +72,10 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 			// Add onClick
 			marker.onClick = function() {
 				$log.log(marker.options.title + ' clicked!');
-				$scope.windowOptions.show = true;
-				$scope.selectedMarker = marker;
-				$scope.$apply();
+				$scope.$apply(function() {
+					$scope.selectedMarker = marker;
+					$scope.windowOptions.show = true;
+				});
 			};
 
 			return marker;
