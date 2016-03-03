@@ -7,40 +7,20 @@
 	<h3>Loading Map and Data...</h3>
 </div>
 
-<div class="row">
-	<div class="col-md-8">
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-			<ui-gmap-window coords="selectedMarker.coords" show="windowOptions.show" options="windowOptions" closeClick="closeClick()">
-				<div>
-					<h4>{{ main.buildings[selectedMarker.id].name }}</h4>
+<div>
+	<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+		<ui-gmap-window coords="selectedMarker.coords" show="windowOptions.show" options="windowOptions" closeClick="closeClick()">
+			<div>
+				<h4>{{ main.buildings[selectedMarker.id].name }}</h4>
 
-					<p><b>Current Occupancy:</b> {{ main.buildings[selectedMarker.id].occupancy }}</p>
+				<p><b>Current Occupancy:</b> {{ main.buildings[selectedMarker.id].occupancy }}</p>
 
-					<p><a href="/">More info here</a></p>
-				</div>
-			</ui-gmap-window>
+				<p><a href="/">More info here</a></p>
+			</div>
+		</ui-gmap-window>
 
-			<ui-gmap-markers models="markers" coords="'coords'" icon="'icon'" options="'options'" click="onClick()"></ui-gmap-markers>
-		</ui-gmap-google-map>
-	</div>
-
-	<div class="col-md-4">
-		<table class="table table-bordered table-striped" ng-show="main.buildings">
-			<h3>List of Campus Buildings</h3>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Occupancy</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="building in main.buildings">
-					<td>{{ building.name }}</td>
-					<td>{{ building.occupancy }} / 100</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+		<ui-gmap-markers models="markers" coords="'coords'" icon="'icon'" options="'options'" click="onClick()"></ui-gmap-markers>
+	</ui-gmap-google-map>
 </div>
 
 

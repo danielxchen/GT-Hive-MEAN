@@ -40,7 +40,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
     uiGmapGoogleMapApi.then(function(maps) {
 
     	$scope.map = {
-	  		center: { latitude: 33.7753, longitude: -84.3975 },
+	  		center: { latitude: 33.7762, longitude: -84.3975 },
 	  		zoom: 16,
 	  		options: $scope.mapOptions,
 		};

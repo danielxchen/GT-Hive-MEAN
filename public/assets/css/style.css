@@ -1,3 +1,8 @@
 .angular-google-map-container { 
-	height: 500px; 
+	height: 650px; 
+}
+
+.container-fluid {
+	  padding-right: 50px;
+	  padding-left: 50px;
 }
