@@ -10,8 +10,15 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 	$scope.selectedMarker = {};
 
-	$scope.windowOptions = {
-		show: false
+	$scope.infoWindow = {
+		options: {
+			show: false
+		},
+		templateUrl: "app/views/templates/info.html",
+        templateParameter: {
+         	title: "",
+         	occupancy: ""
+        }	
 	}
 
 	$scope.mapOptions = {
@@ -74,7 +81,9 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 				$log.log(marker.options.title + ' clicked!');
 				$scope.$apply(function() {
 					$scope.selectedMarker = marker;
-					$scope.windowOptions.show = true;
+					$scope.infoWindow.templateParameter.title = marker.options.title;
+					$scope.infoWindow.templateParameter.occupancy = vm.buildings[marker.id].occupancy;
+					$scope.infoWindow.options.show = true;
 				});
 			};
 
