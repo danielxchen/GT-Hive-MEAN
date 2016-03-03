@@ -12,6 +12,11 @@ angular.module('app.routes', ['ngRoute'])
 		// route for the login page
 		.when('/login', {
 			templateUrl : 'app/views/pages/login.html'
+		})
+
+		// route for a building
+		.when('/buildings/:bid', {
+			templateUrl: 'app/views/pages/building.html'
 		});
 
 	$locationProvider.html5Mode(true);
