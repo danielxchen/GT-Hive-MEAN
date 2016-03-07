@@ -19,7 +19,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
          	title: "",
          	occupancy: ""
         }	
-	}
+	};
 
 	$scope.mapOptions = {
         disableDefaultUI: true,
