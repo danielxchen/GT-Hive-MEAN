@@ -16,7 +16,8 @@ angular.module('app.routes', ['ngRoute'])
 
 		// route for a building
 		.when('/buildings/:bid', {
-			templateUrl: 'app/views/pages/building.html'
+			templateUrl: 'app/views/pages/building.html',
+			controller: 'buildingController'
 		});
 
 	$locationProvider.html5Mode(true);
