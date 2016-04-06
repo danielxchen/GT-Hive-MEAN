@@ -13,7 +13,8 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	var bids = [160, 166, 77, 12, 153, 50, 81, 85, 55, 114];
 
 	// Base url
-	var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=';
+	// var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=';
+	var url = 'http://wifi.dssg.rnoc.gatech.edu:8080/gtwhereami/locationinfo?bid='
 
 	bids.forEach(function(bid) {
 		// Get the current occupancy of the building 
