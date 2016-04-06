@@ -9,11 +9,6 @@ angular.module('app.routes', ['ngRoute'])
 			templateUrl : 'app/views/pages/home.html'
 		})
 
-		// route for the login page
-		.when('/login', {
-			templateUrl : 'app/views/pages/login.html'
-		})
-
 		// route for a building
 		.when('/buildings/:bid', {
 			templateUrl: 'app/views/pages/building.html'
