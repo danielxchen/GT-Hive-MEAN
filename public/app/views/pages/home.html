@@ -15,6 +15,8 @@
 		</ui-gmap-window>
 
 		<ui-gmap-markers models="markers" coords="'coords'" icon="'icon'" options="'options'" click="onClick()"></ui-gmap-markers>
+		<ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
+                  fill="p.fill" fit="false"></ui-gmap-polygon>
 	</ui-gmap-google-map>
 </div>
 
