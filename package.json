@@ -1,5 +1,9 @@
 {
   "name": "gt-hive-mean",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielxchen/GT-Hive-MEAN"
+  },
   "main": "server.js",
   "dependencies": {
     "bluebird": "^3.1.1",
