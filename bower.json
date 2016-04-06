@@ -23,7 +23,8 @@
     "angular-route": "~1.4.8",
     "angular-google-maps": "~2.2.1",
     "lodash": "~3.10.1",
-    "angular-simple-logger": "~0.1.5"
+    "angular-simple-logger": "~0.1.5",
+    "Chart.js": "~1.1.0"
   },
   "resolutions": {
     "angular-simple-logger": "~0.0.1"
