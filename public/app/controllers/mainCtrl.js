@@ -40,7 +40,21 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
         }]
     };
 
-    $scope.polygons = [
+    $scope.closeClick = function() {
+        $scope.windowOptions.show = false;
+    };
+
+	// uiGmapGoogleMapApi is a promise.
+    // The "then" callback function provides the google.maps object.
+    uiGmapGoogleMapApi.then(function(maps) {
+
+    	$scope.map = {
+	  		center: { latitude: 33.7762, longitude: -84.3975 },
+	  		zoom: 16,
+	  		options: $scope.mapOptions
+		};
+
+	    $scope.polygons = [
             {
                 id: 1,
                 path: [
@@ -148,8 +162,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
                 ],
                 stroke: {
                     color: '#000000',
-                    weight: 2,
-                    opacity: 0.5
+                    weight: 2
                 },
                 geodesic: false,
                 visible: true,
@@ -159,20 +172,6 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
                 }
             }
         ];
-
-    $scope.closeClick = function() {
-        $scope.windowOptions.show = false;
-    };
-
-	// uiGmapGoogleMapApi is a promise.
-    // The "then" callback function provides the google.maps object.
-    uiGmapGoogleMapApi.then(function(maps) {
-
-    	$scope.map = {
-	  		center: { latitude: 33.7762, longitude: -84.3975 },
-	  		zoom: 16,
-	  		options: $scope.mapOptions
-		};
 
 		return Building.all();
 
