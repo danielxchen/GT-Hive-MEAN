@@ -14,7 +14,8 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 
 	// Base url
 	// var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=';
-	var url = 'http://wifi.dssg.rnoc.gatech.edu:8080/gtwhereami/locationinfo?bid='
+	// var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/gtwhereami/locationinfo?bid=';
+	var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count/building_id=';
 
 	bids.forEach(function(bid) {
 		// Get the current occupancy of the building 
@@ -24,11 +25,11 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 
 	  	}).then(function(parsed) {
 	  		// Update the building's occupancy
-	  		return Building.findOneAndUpdateAsync({ bid: bid }, { $set: { occupancy: parsed.occupancy } }, { new: true });
+	  		return Building.findOneAndUpdateAsync({ bid: bid }, { $set: { occupancy: parsed.clientcount } }, { new: true });
 
 	  	}).then(function(doc) {
 	  		// We got the updated document
-	  		console.log(doc.name, 'updated!');
+	  		console.log(bid, 'updated!');
 
 	  	}).catch(function(err) {
 	  		// Catch any error that happened along the way
