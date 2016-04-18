@@ -17,7 +17,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		templateUrl: "app/views/templates/info.html",
         templateParameter: {
          	title: "",
-         	occupancy: ""
+         	occupancy: "",
+            building_id: -1,
         }	
 	};
 
@@ -204,6 +205,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 					$scope.selectedMarker = marker;
 					$scope.infoWindow.templateParameter.title = marker.options.title;
 					$scope.infoWindow.templateParameter.occupancy = vm.buildings[marker.id].occupancy;
+                    $scope.infoWindow.templateParameter.building_id = marker.id;
 					$scope.infoWindow.options.show = true;
 				});
 			};
