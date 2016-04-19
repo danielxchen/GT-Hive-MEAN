@@ -9,7 +9,8 @@ angular.module('buildingCtrl', ['buildingService', 'chart.js'])
 
     console.log("Building page for building_id=" + $routeParams.bid);
 
-    Building.get($routeParams.bid).then( function(res) {
-        console.log(res);
-    });
+    // TODO: use actual data
+    // Building.get($routeParams.bid).then( function(res) {
+    //     console.log(res);
+    // });
 });
