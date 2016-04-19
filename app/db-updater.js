@@ -37,4 +37,4 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	  	});
 	});
 	
-}, null, false, 'America/New_York');
+}, null, false, 'America/New_York'); 
