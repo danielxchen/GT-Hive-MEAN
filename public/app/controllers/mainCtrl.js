@@ -52,113 +52,111 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
     	$scope.map = {
 	  		center: { latitude: 33.7762, longitude: -84.3975 },
 	  		zoom: 16,
-	  		options: $scope.mapOptions
-		};
-
-	    $scope.polygons = [
+	  		options: $scope.mapOptions,
+		    polygons: [
             {
                 id: 1,
                 path: [
 				    {
-						latitude:33.733618
-						longitude:-84.454983
+						latitude:33.733618,
+						longitude:-84.454983,
 					},
 					{
-						latitude:33.819230
-						longitude:-84.454983
+						latitude:33.819230,
+						longitude:-84.454983,
 					},
 					{
-						latitude:33.819230
-						longitude:-84.342974
+						latitude:33.819230,
+						longitude:-84.342974,
 					},
 					{
-						latitude:33.733618
-						longitude:-84.342974
+						latitude:33.733618,
+						longitude:-84.342974,
 
 					},
 					{
-						latitude:33.733618
-						longitude:-84.454983
+						latitude:33.733618,
+						longitude:-84.454983,
 					},
 					{
-						latitude:33.773618
-						longitude:-84.403067
+						latitude:33.773618,
+						longitude:-84.403067,
 					},
 					{
-						latitude:33.773395
-						longitude:-84.402219
+						latitude:33.773395,
+						longitude:-84.402219,
 					},
 					{
-						latitude:33.773395
-						longitude:-84.399698
+						latitude:33.773395,
+						longitude:-84.399698,
 					},
 					{
-						latitude:33.772887
-						longitude:-84.397348
+						latitude:33.772887,
+						longitude:-84.397348,
 					},
 					{
-						latitude:33.772450
-						longitude:-84.396329
+						latitude:33.772450,
+						longitude:-84.396329,
 					},
 					{
-						latitude:33.771299
-						longitude:-84.390578
+						latitude:33.771299,
+						longitude:-84.390578,
 					},
 					{
-						latitude:33.771335
-						longitude:-84.390514
+						latitude:33.771335,
+						longitude:-84.390514,
 					},
 					{
-						latitude:33.773895
-						longitude:-84.391040
+						latitude:33.773895,
+						longitude:-84.391040,
 					},
 					{
-						latitude:33.775924
-						longitude:-84.391136
+						latitude:33.775924,
+						longitude:-84.391136,
 					},
 					{
-						latitude:33.777952
-						longitude:-84.391351
+						latitude:33.777952,
+						longitude:-84.391351,
 					},
 					{
-						latitude:33.781502
-						longitude:-84.407401
+						latitude:33.781502,
+						longitude:-84.407401,
 					},
 					{
-						latitude:33.781395
-						longitude:-84.407395
+						latitude:33.781395,
+						longitude:-84.407395,
 					},
 					{
-						latitude:33.779837
-						longitude:-84.407476
+						latitude:33.779837,
+						longitude:-84.407476,
 					},
 					{
-						latitude:33.778351
-						longitude:-84.407207
+						latitude:33.778351,
+						longitude:-84.407207,
 					},
 					{
-						latitude:33.777448
-						longitude:-84.406755
+						latitude:33.777448,
+						longitude:-84.406755,
 					},
 					{
-						latitude:33.776570
-						longitude:-84.406108
+						latitude:33.776570,
+						longitude:-84.406108,
 					},
 					{
-						latitude:33.775955
-						longitude:-84.404815
+						latitude:33.775955,
+						longitude:-84.404815,
 					},
 					{
-						latitude:33.774938
-						longitude:-84.404118
+						latitude:33.774938,
+						longitude:-84.404118,
 					},
 					{
-						latitude:33.774332
-						longitude:-84.403067
+						latitude:33.774332,
+						longitude:-84.403067,
 					},
 					{
-						latitude:33.773618
-						longitude:-84.403067
+						latitude:33.773618,
+						longitude:-84.403067,
 					}
                 ],
                 stroke: {
@@ -172,7 +170,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
                     opacity: 0.7
                 }
             }
-        ];
+        ]};
 
 		return Building.all();
 
