@@ -10,7 +10,21 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
 
 	// Array of bids
-	var bids = [160, 166, 77, 12, 153, 50, 81, 85, 55, 114];
+	var bids = [
+		160,
+		166,
+		77,
+		12,
+		153,
+		50,
+		81,
+		85,
+		55,
+		114,
+		116, // woodruff dining
+		135, // mrdc
+		17,	// bobby dodd
+	];
 
 	// Base url
 	// var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=';
