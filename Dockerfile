@@ -13,4 +13,5 @@ RUN bower install --allow-root
 EXPOSE 8080
 COPY run.sh ./
 RUN pacman -S --noconfirm openconnect
+COPY password.txt ./
 CMD ./run.sh
