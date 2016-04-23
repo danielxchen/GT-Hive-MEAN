@@ -53,10 +53,10 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 	  		center: { latitude: 33.7762, longitude: -84.3975 },
 	  		zoom: 16,
 	  		options: $scope.mapOptions,
-		    polygons: [
+		    polygon: [
             {
                 id: 1,
-                path: [[
+                path: [
 				    {
 						latitude:33.755414,
 						longitude:-84.426842,
@@ -77,8 +77,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 					{
 						latitude:33.755414,
 						longitude:-84.426842,
-					}],
-					[{
+					},
+					{
 						latitude:33.771478,
 						longitude:-84.396050,
 					},
@@ -130,7 +130,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 						latitude:33.771478,
 						longitude:-84.396050,
 					}
-                ]],
+                ],
                 stroke: {
                     color: '#000000',
                     weight: 2
