@@ -58,105 +58,77 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
                 id: 1,
                 path: [
 				    {
-						latitude:33.733618,
-						longitude:-84.454983,
+						latitude:33.755414,
+						longitude:-84.426842,
 					},
 					{
-						latitude:33.819230,
-						longitude:-84.454983,
+						latitude:33.798220,
+						longitude:-84.426842,
 					},
 					{
-						latitude:33.819230,
-						longitude:-84.342974,
+						latitude:33.798220,
+						longitude:-84.370837,
 					},
 					{
-						latitude:33.733618,
-						longitude:-84.342974,
+						latitude:33.755414,
+						longitude:-84.370837,
 
 					},
 					{
-						latitude:33.733618,
-						longitude:-84.454983,
+						latitude:33.755414,
+						longitude:-84.426842,
 					},
 					{
-						latitude:33.773618,
-						longitude:-84.403067,
+						latitude:33.771478,
+						longitude:-84.396050,
 					},
 					{
-						latitude:33.773395,
-						longitude:-84.402219,
-					},
-					{
-						latitude:33.773395,
-						longitude:-84.399698,
-					},
-					{
-						latitude:33.772887,
-						longitude:-84.397348,
-					},
-					{
-						latitude:33.772450,
-						longitude:-84.396329,
-					},
-					{
-						latitude:33.771299,
+						latitude:33.771371,
 						longitude:-84.390578,
 					},
 					{
-						latitude:33.771335,
-						longitude:-84.390514,
+						latitude:33.781519,
+						longitude:-84.391265,
 					},
 					{
-						latitude:33.773895,
-						longitude:-84.391040,
+						latitude:33.781519,
+						longitude:-84.400556,
 					},
 					{
-						latitude:33.775924,
-						longitude:-84.391136,
+						latitude:33.781546,
+						longitude:-84.407310,
 					},
 					{
-						latitude:33.777952,
-						longitude:-84.391351,
+						latitude:33.778367,
+						longitude:-84.407254,
 					},
 					{
-						latitude:33.781502,
-						longitude:-84.407401,
+						latitude:33.776740,
+						longitude:-84.406167,
 					},
 					{
-						latitude:33.781395,
-						longitude:-84.407395,
-					},
-					{
-						latitude:33.779837,
-						longitude:-84.407476,
-					},
-					{
-						latitude:33.778351,
-						longitude:-84.407207,
-					},
-					{
-						latitude:33.777448,
-						longitude:-84.406755,
-					},
-					{
-						latitude:33.776570,
-						longitude:-84.406108,
-					},
-					{
-						latitude:33.775955,
-						longitude:-84.404815,
-					},
-					{
-						latitude:33.774938,
-						longitude:-84.404118,
-					},
-					{
-						latitude:33.774332,
-						longitude:-84.403067,
+						latitude:33.774073,
+						longitude:-84.403115,
 					},
 					{
 						latitude:33.773618,
-						longitude:-84.403067,
+						longitude:-84.401951,
+					},
+					{
+						latitude:33.773261,
+						longitude:-84.399912,
+					},
+					{
+						latitude:33.772958,
+						longitude:-84.398078,
+					},
+					{
+						latitude:33.772655,
+						longitude:-84.397101,
+					},
+					{
+						latitude:33.771478,
+						longitude:-84.396050,
 					}
                 ],
                 stroke: {
