@@ -1,4 +1,4 @@
-angular.module('gthiveApp', ['app.routes', 'mainCtrl', 'buildingCtrl', 'buildingService', 'uiGmapgoogle-maps'])
+angular.module('gthiveApp', ['app.routes', 'mainCtrl', 'buildingCtrl', 'buildingService', 'uiGmapgoogle-maps', 'smart-table'])
 
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

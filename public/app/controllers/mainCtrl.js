@@ -22,8 +22,16 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
         }	
 	};
 
+	$scope.rowCollection = [
+        {firstName: 'Laurent', lastName: 'Renard', balance: 102, email: 'whatever@gmail.com'},
+        {firstName: 'Blandine', lastName: 'Faivre', balance: -2323.22, email: 'oufblandou@gmail.com'},
+        {firstName: 'Francoise', lastName: 'Frere', balance: 42343, email: 'raymondef@gmail.com'}
+    ];
+
 	$scope.mapOptions = {
         disableDefaultUI: true,
+        minZoom: 16,
+        maxZoom: 16,
         styles: [{
             featureType: "poi",
             elementType: "labels",
@@ -40,7 +48,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
     };
 
     $scope.closeClick = function() {
-        $scope.windowOptions.show = false;
+        $scope.infoWindow.options.show = false;
     };
 
 	// uiGmapGoogleMapApi is a promise.
@@ -91,17 +99,21 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 			return marker;
 		};
-
+		$scope.builds = [];
 		// Create markers for all of the buildings
 		for (var i = 0; i < vm.buildings.length; i++) {
 			$scope.markers.push(createMarker(i, vm.buildings[i]));
+			$scope.builds.push(vm.buildings[i]);
 		}
 
 	}).catch(function() {
 		// log an error
 		$log.log('Error occurred, see logs.');
 
+
 	}).then(function() {
 		vm.processing = false;
+		//$scope.$apply();
+		$log.log($scope.builds.length);
     });
 });

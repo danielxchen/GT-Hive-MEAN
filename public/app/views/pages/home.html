@@ -7,16 +7,36 @@
 	<h3>Loading Map and Data...</h3>
 </div>
 
-<div>
-	<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-		<ui-gmap-window coords="selectedMarker.coords" show="infoWindow.options.show" options="infoWindow.options" closeClick="closeClick()"
-			templateUrl="infoWindow.templateUrl"
-			templateParameter="infoWindow.templateParameter" ng-cloak>
-		</ui-gmap-window>
+<div class="row">
+	<div class="col-md-8">
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+			<ui-gmap-window coords="selectedMarker.coords" show="infoWindow.options.show" options="infoWindow.options" closeClick="closeClick()"
+				templateUrl="infoWindow.templateUrl"
+				templateParameter="infoWindow.templateParameter" ng-cloak>
+			</ui-gmap-window>
 
-		<ui-gmap-markers models="markers" coords="'coords'" icon="'icon'" options="'options'" click="onClick()"></ui-gmap-markers>
-	</ui-gmap-google-map>
+			<ui-gmap-markers models="markers" coords="'coords'" icon="'icon'" options="'options'" click="onClick()"></ui-gmap-markers>
+		</ui-gmap-google-map>
+	</div>
+	<div class="col-md-4">
+		<table st-table="builds" class="table table-striped">
+			<thead>
+			<tr>
+				<th st-sort="name" st-skip-natural="true" st-sort-default="true">Building Name</th>
+				<th>Current Occupancy</th>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<input class="input-sm form-control" type="search" st-search="name" placeholder="Search by Name"/>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="build in builds" ng-model="row.id" ng-model-options="{ getterSetter: true }">
+				<td>{{build.name}}</td>
+				<td>{{build.occupancy}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
-
-
-
