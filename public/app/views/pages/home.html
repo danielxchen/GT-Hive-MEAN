@@ -33,10 +33,17 @@
 			</thead>
 			<tbody>
 			<tr ng-repeat="build in displayedBuildings">
-				<td>{{build.name}}</td>
+				<td><a href="/buildings/{{build.bid}}">{{build.name}}</a></td>
 				<td>{{build.occupancy}}</td>
 			</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2" class="text-center">
+						<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
+					</td>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </div>

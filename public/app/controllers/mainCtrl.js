@@ -10,6 +10,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 	$scope.safeBuildings = [];
 
+	$scope.itemsByPage = 5;
+
 	$scope.selectedMarker = {};
 
 	$scope.infoWindow = {
