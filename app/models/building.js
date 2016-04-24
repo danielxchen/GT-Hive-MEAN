@@ -9,6 +9,7 @@ var BuildingSchema = new Schema({
 	occupancy: Number,
 	capacity: Number,
 	latitude: Number,
+    show_on_map: Boolean,
 	longitude: Number },
 	{ timestamps: true } 
 );

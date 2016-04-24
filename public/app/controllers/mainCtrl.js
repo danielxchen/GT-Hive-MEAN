@@ -67,7 +67,13 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		return Building.all();
 
 	}).then(function(response) {
-		vm.buildings = response.data;
+        // filter based on show_on_map property
+        vm.buildings = [];
+        response.data.forEach(function(building) {
+            if (building.show_on_map) {
+                vm.buildings.append(building);
+            }
+        });
 
 		// Create marker for a building
 		var createMarker = function(i, building) {
@@ -95,6 +101,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 					$scope.selectedMarker = marker;
 					$scope.infoWindow.templateParameter.title = marker.options.title;
 					$scope.infoWindow.templateParameter.occupancy = vm.buildings[marker.id].occupancy;
+                    console.log("marker id", marker.id);
+                    console.log("bid", vm.buildings[marker.id].bid);
                     $scope.infoWindow.templateParameter.building_id = vm.buildings[marker.id].bid;
 					$scope.infoWindow.options.show = true;
 				});
