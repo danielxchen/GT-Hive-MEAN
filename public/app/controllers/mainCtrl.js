@@ -32,8 +32,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 	$scope.mapOptions = {
         disableDefaultUI: true,
-        minZoom: 16,
-        maxZoom: 16,
+        scrollwheel: false,
         styles: [{
             featureType: "poi",
             elementType: "labels",
@@ -58,7 +57,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
     uiGmapGoogleMapApi.then(function(maps) {
 
     	$scope.map = {
-	  		center: { latitude: 33.7762, longitude: -84.3975 },
+	  		center: { latitude: 33.7764, longitude: -84.3985 },
 	  		zoom: 16,
 	  		options: $scope.mapOptions,
 		};
