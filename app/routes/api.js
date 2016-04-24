@@ -34,7 +34,8 @@ module.exports = function(app, express) {
 		var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count?details=true';
 		console.log("making proxy request to rnoc api");
 		request.getAsync(url).then(function(apiRes) {
-			res.body = apiRes.body;
+			console.log("got response from rnoc api");
+			res.send(apiRes.body);
 		});
 	});
 
