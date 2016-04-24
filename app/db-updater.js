@@ -41,18 +41,18 @@ module.exports = new CronJob('0 */1 * * * *', function() {
 	  		return JSON.parse(res.body);
 
 	  	}).then(function(parsed) {
-	  		// Update the historical data
-	  		History.findOne({ bid: bid }, function (err, building) {
-	  			if (err) return handleError(err);
+	  // 		// Update the historical data
+	  // 		History.findOne({ bid: bid }, function (err, building) {
+	  // 			if (err) return handleError(err);
 
-	  			building.history.push({ occupancy: parsed.clientcount });
+	  // 			building.history.push({ occupancy: parsed.clientcount });
 
-	  			building.save(function (err) {
-  					if (err) return handleError(err)
-  					console.log(bid, 'history updated!');
-				});
+	  // 			building.save(function (err) {
+  	// 				if (err) return handleError(err)
+  	// 				console.log(bid, 'history updated!');
+			// 	});
 
-			});
+			// });
 	  		return parsed;
 
 	  	}).then(function(parsed) {
