@@ -8,6 +8,8 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 	$scope.markers = [];
 
+	$scope.safeBuildings = [];
+
 	$scope.selectedMarker = {};
 
 	$scope.infoWindow = {
@@ -99,11 +101,11 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 
 			return marker;
 		};
-		$scope.builds = [];
+
 		// Create markers for all of the buildings
 		for (var i = 0; i < vm.buildings.length; i++) {
 			$scope.markers.push(createMarker(i, vm.buildings[i]));
-			$scope.builds.push(vm.buildings[i]);
+			$scope.safeBuildings.push(vm.buildings[i]);
 		}
 
 	}).catch(function() {
@@ -114,6 +116,6 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 	}).then(function() {
 		vm.processing = false;
 		//$scope.$apply();
-		$log.log($scope.builds.length);
+		//$log.log($scope.builds[0].name);
     });
 });
