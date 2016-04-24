@@ -1,13 +1,20 @@
 FROM justbuchanan/docker-archlinux
 
 RUN pacman -Sy --noconfirm nodejs npm git
+RUN pacman -S --noconfirm openconnect
 RUN npm install -g -y nodemon bower gulp
 
-COPY ./ gthive
+RUN mkdir gthive
+COPY package.json .bowerrc bower.json gthive/
 WORKDIR gthive
 
 RUN npm install
 RUN bower install --allow-root
 
+ADD server.js gulpfile.js config.js ./
+ADD app ./app
+ADD public ./public
+
 EXPOSE 8080
-CMD ["gulp"]
+COPY password.txt run.sh ./
+CMD ./run.sh
