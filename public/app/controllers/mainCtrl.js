@@ -84,7 +84,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 					$scope.selectedMarker = marker;
 					$scope.infoWindow.templateParameter.title = marker.options.title;
 					$scope.infoWindow.templateParameter.occupancy = vm.buildings[marker.id].occupancy;
-                    $scope.infoWindow.templateParameter.building_id = marker.id;
+                    $scope.infoWindow.templateParameter.building_id = vm.buildings[marker.id].bid;
 					$scope.infoWindow.options.show = true;
 				});
 			};
