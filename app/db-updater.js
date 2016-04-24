@@ -5,8 +5,11 @@ var request = Promise.promisifyAll(require('request'));
 var Building = require('./models/building');
 Promise.promisifyAll(Building);
 Promise.promisifyAll(Building.prototype);
+var History = require('./models/history');
+Promise.promisifyAll(History);
+Promise.promisifyAll(History.prototype);
 
-module.exports = new CronJob('0 */5 * * * *', function() {
+module.exports = new CronJob('0 */1 * * * *', function() {
 	console.log('Job Starting');
 
 	// Array of bids
@@ -23,7 +26,7 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 		114,
 		116, // woodruff dining
 		135, // mrdc
-		17,	// bobby dodd
+		17	// bobby dodd
 	];
 
 	// Base url
@@ -36,6 +39,21 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	  	request.getAsync(url + bid).then(function(res) {
 	  		// Parse the response into JSON
 	  		return JSON.parse(res.body);
+
+	  	}).then(function(parsed) {
+	  		// Update the historical data
+	  		History.findOne({ bid: bid }, function (err, building) {
+	  			if (err) return handleError(err);
+
+	  			building.history.push({ occupancy: parsed.clientcount });
+
+	  			building.save(function (err) {
+  					if (err) return handleError(err)
+  					console.log(bid, 'history updated!');
+				});
+
+			});
+	  		return parsed;
 
 	  	}).then(function(parsed) {
 	  		// Update the building's occupancy
