@@ -56,7 +56,13 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		return Building.all();
 
 	}).then(function(response) {
-		vm.buildings = response.data;
+        // filter based on show_on_map property
+        vm.buildings = [];
+        response.data.forEach(function(building) {
+            if (building.show_on_map) {
+                vm.buildings.append(building);
+            }
+        });
 
 		// Create marker for a building
 		var createMarker = function(i, building) {
