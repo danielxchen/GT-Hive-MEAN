@@ -70,7 +70,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
         // filter based on show_on_map property
         vm.buildings = [];
         response.data.forEach(function(building) {
-        	$scope.safeBuildings.push(building)
+        	$scope.safeBuildings.push(building);
             if (building.show_on_map) {
                 vm.buildings.push(building);
             }
