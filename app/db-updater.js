@@ -2,13 +2,19 @@
 var CronJob = require('cron').CronJob;
 var Promise = require('bluebird');
 var request = Promise.promisifyAll(require('request'));
+var async = require('async');
+
 var Building = require('./models/building');
 Promise.promisifyAll(Building);
 Promise.promisifyAll(Building.prototype);
+
+var Floor = require('./models/floor');
+Promise.promisifyAll(Floor);
+Promise.promisifyAll(Floor.prototype);
+
 var History = require('./models/history');
 Promise.promisifyAll(History);
 Promise.promisifyAll(History.prototype);
-var async = require('async');
 
 module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
@@ -125,18 +131,23 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	// Base url
 	// var url = 'http://gtwhereami.herokuapp.com/locationinfo?bid=';
 	// var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/gtwhereami/locationinfo?bid=';
-	var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count/building_id=';
+	var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count';
 
-
-	function update_building(bid, callback) {
-		// leading zero for double-digit building ids or else rnoc api won't work
+	// leading zero for double-digit building ids or else rnoc api won't work
+	function stringBid(bid) {
 		var strBid = bid.toString();
 		if (strBid.length == 2) {
 			strBid = "0" + strBid;
 		}
+		return strBid;
+	}
+
+
+	function update_building(bid, callback) {
+		var strBid = stringBid(bid);
 
 		// Get the current occupancy of the building 
-	  	request.getAsync(url + strBid).then(function(res) {
+	  	request.getAsync(url + '/building_id=' + strBid).then(function(res) {
 	  		// Parse the response into JSON
 	  		return JSON.parse(res.body);
 
@@ -187,6 +198,49 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	queue.drain = function() {
 		console.log("Done updating buildings");
 	};
-	queue.push(bids);
+	queue.push(bids); //TODO(justin): uncomment
+
+
+	function update_floors() {
+		request.getAsync(url + '?details=true').then(function(res) {
+			return JSON.parse(res.body);
+		}).then(function(parsed) {
+			var aps = parsed['AccessPoints'];
+
+            // sum floor data
+            // example: floorData[building_id][floor] = count
+            var floorData = {};
+            aps.forEach(function(ap) {
+                if (!(ap.building_id in floorData)) {
+                    floorData[ap.building_id] = {};
+                }
+
+                if (!(ap.floor in floorData[ap.building_id])) {
+                    floorData[ap.building_id][ap.floor] = 0;
+                }
+
+                floorData[ap.building_id][ap.floor] += ap.clientcount;
+            });
+
+            // update database, adding new Floor records when necessary
+            for (var bidStr in floorData) {
+                var bid = parseInt(bidStr);
+                if (!isNaN(bid)) {
+                    var floors = floorData[bidStr];
+                    for (var floorName in floors) {
+                        var count = floors[floorName];
+                        Floor.findOneAndUpdateAsync({ bid: bid, floor: floorName },
+                            { $set: { occupancy: count } }, { new: true, upsert: true });
+                    }
+                }
+            }
+
+            console.log(floorData);
+
+		});
+	}
+
+    update_floors();
+
 	
 }, null, false, 'America/New_York');
