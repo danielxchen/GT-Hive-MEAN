@@ -8,6 +8,7 @@ Promise.promisifyAll(Building.prototype);
 var History = require('./models/history');
 Promise.promisifyAll(History);
 Promise.promisifyAll(History.prototype);
+var async = require('async');
 
 module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
@@ -126,7 +127,8 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	// var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/gtwhereami/locationinfo?bid=';
 	var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count/building_id=';
 
-	bids.forEach(function(bid) {
+
+	function update_building(bid, callback) {
 		// Get the current occupancy of the building 
 	  	request.getAsync(url + bid).then(function(res) {
 	  		// Parse the response into JSON
@@ -155,10 +157,24 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	  		// We got the updated document
 	  		console.log(bid, 'updated!');
 
+	  		// tell async we're done
+	  		callback();
+
+	  		return null
 	  	}).catch(function(err) {
 	  		// Catch any error that happened along the way
 	  		console.log('Error occured:', err);
+
+	  		// tell async we're done
+	  		callback();
+	  		return null;
 	  	});
-	});
+	}
+
+	var queue = async.queue(update_building, 5); // 5 simultaneous requests
+	queue.drain = function() {
+		console.log("Done updating buildings");
+	};
+	queue.push(bids);
 	
 }, null, false, 'America/New_York');
