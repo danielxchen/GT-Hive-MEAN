@@ -37,12 +37,13 @@ module.exports = function(app, express) {
 
 			var totals = {};
 			var counts = {};
-			var averages = [];
+
+			// values indexed by hour (0-23)
+			var todayEntries = {};
 
 			var lowerBound = moment().startOf('day');
 			var upperBound = moment().endOf('day');
 
-			var entries = [];
 			history.history.forEach(function(val) {
 				var date = moment(val.createdAt);
 
@@ -56,9 +57,14 @@ module.exports = function(app, express) {
 				counts[nearestHour] += 1;
 
 				if (lowerBound.isBefore(date) && date.isBefore(upperBound)) {
-					entries.push({date: date, occupancy: val.occupancy})
+					if (!(nearestHour in todayEntries)) {
+						todayEntries[nearestHour] = val.occupancy;
+					}
 				}
 			});
+
+			var averages = [];
+			var today = [];
 
 			for (var i = 0; i < 24; i++) {
 				if (i in totals) {
@@ -66,9 +72,17 @@ module.exports = function(app, express) {
 				} else {
 					averages.push(0);
 				}
+
+				if (i in todayEntries) {
+					today.push(todayEntries[i]);
+				} else {
+					today.push(0);
+				}
 			}
 
-			res.json({today: entries, averages: averages});
+
+
+			res.json({today: today, averages: averages});
 		});
 	});
 
