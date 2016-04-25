@@ -3,6 +3,7 @@ var Building = require('../models/building');
 var Floor = require('../models/floor');
 var Promise = require('bluebird');
 var request = Promise.promisifyAll(require('request'));
+var History = require('../models/history');
 
 module.exports = function(app, express) {
 
@@ -35,6 +36,20 @@ module.exports = function(app, express) {
 			console.log("Building Data")
 			// return floors
 			res.json([4,6,1,9,20,30,5,12,14,45,9,20,10,12,10,45,23,09,32,12,34,67,12,23]);
+		});
+	});
+
+	apiRouter.get('/timeseries/:bid', function(req, res) {
+		History.findOne({bid: req.params.bid }, function(err, history) {
+			if (err) return handleError(err);
+
+			var data = [];
+			history.history.forEach(function(val) {
+				// console.log(val);
+				data.push({date: val.createdAt, occupancy: val.occupancy})
+			});
+
+			res.json(data);
 		});
 	});
 
