@@ -9,7 +9,7 @@ var History = require('./models/history');
 Promise.promisifyAll(History);
 Promise.promisifyAll(History.prototype);
 
-module.exports = new CronJob('0 */1 * * * *', function() {
+module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
 
 	// Array of bids
