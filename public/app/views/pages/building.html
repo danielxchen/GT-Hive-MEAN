@@ -5,67 +5,33 @@
 		</h1>
 	</div>
 
-	<table class="table table-bordered table-striped">
+	<table st-safe-src="safeFloors" st-table="displayedFloors" class="table table-striped">
 		<thead>
-			<tr>
-				<th>Floor</th>
-				<th>Occupancy</th>
-			</tr>
+		<tr>
+			<th st-sort="name" st-skip-natural="true" st-sort-default="true">Floor</th>
+			<th>Current Occupancy</th>
+		</tr>
+
 		</thead>
 		<tbody>
-			<tr>
-				<td>Floor 1</td>
-				<td>56</td>
-			</tr>
-
-			<tr>
-				<td>Floor 2</td>
-				<td>12</td>
-			</tr>
-
-			<tr>
-				<td>Floor 4</td>
-				<td>33</td>
-			</tr>
-
-			<tr>
-				<td>Floor 5</td>
-				<td>28</td>
-			</tr>
+		<tr ng-repeat="floor in displayedFloors">
+			<td>{{floor.name}}</td>
+			<td>{{floor.occupancy}}</td>
+		</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2" class="text-center">
+					<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
-
-	<!--<table st-safe-src="safeBuildings" st-table="displayedBuildings" class="table table-striped">
-			<thead>
-			<tr>
-				<th st-sort="name" st-skip-natural="true" st-sort-default="true">Building Name</th>
-				<th>Current Occupancy</th>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input class="input-sm form-control" type="search" st-search="name" placeholder="Search by Name"/>
-				</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr ng-repeat="build in displayedBuildings">
-				<td>{{build.name}}</td>
-				<td>{{build.occupancy}}</td>
-			</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="2" class="text-center">
-						<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
-					</td>
-				</tr>
-			</tfoot>
-		</table>-->
 
 	<br>
 
 	<div>
-		<h2>Occupancy vs. Time Graph</h2>
+		<h2>Occupancy by Hour</h2>
 		<canvas id="occupancyVsTime" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series"></canvas>
 </div>
 
