@@ -17,5 +17,9 @@ angular.module('buildingService', [])
 		return $http.get('/api/buildings/' + bid);
 	}
 
+	buildingFactory.getInfo = function(bid) {
+		return $http.get('/api/building_info/' + bid);
+	}
+
 	return buildingFactory;
 });

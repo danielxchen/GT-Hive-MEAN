@@ -99,6 +99,19 @@ module.exports = function(app, express) {
 		});
 	});
 
+	apiRouter.get('/building_info/:bid', function(req, res) {
+		Building.findOne({bid: req.params.bid}, function(err, building) {
+			if (err) return handleError(err);
+
+			if (building == null) {
+				res.sendStatus(404);
+				return;
+			}
+
+			res.json({name: building.name});
+		});
+	});
+
 	// returns a list of all occupancy data points we have in the database for a given building
     apiRouter.get('/timeseries/:bid', function(req, res) {
         History.findOne({bid: req.params.bid }, function(err, history) {

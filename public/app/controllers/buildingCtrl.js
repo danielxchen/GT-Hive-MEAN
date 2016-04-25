@@ -5,6 +5,12 @@ angular.module('buildingCtrl', ['buildingService', 'chart.js'])
     $scope.series = ['Average', 'Today'];
     $scope.legend = true;
 
+    $scope.building_name = "Building name";
+    Building.getInfo($routeParams.bid).then(function(res) {
+        $scope.building_name = res.data.name;
+        console.log("buldingname", $scope.building_name)
+    });
+
     // initialize graph to be empty, then update via async request
     $scope.data = [];
     Building.graphdata($routeParams.bid).then(function(res) {
