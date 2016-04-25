@@ -11,6 +11,8 @@ var path 	   = require('path');
 // APP CONFIGURATION ==================
 // ====================================
 
+process.env.TZ = 'America/New_York';
+
 // Connect to database
 mongoose.connect(config.database); 
 
