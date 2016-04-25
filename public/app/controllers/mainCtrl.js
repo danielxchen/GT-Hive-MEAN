@@ -70,8 +70,9 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
         // filter based on show_on_map property
         vm.buildings = [];
         response.data.forEach(function(building) {
+        	$scope.safeBuildings.push(building)
             if (building.show_on_map) {
-                vm.buildings.append(building);
+                vm.buildings.push(building);
             }
         });
 
@@ -114,7 +115,7 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 		// Create markers for all of the buildings
 		for (var i = 0; i < vm.buildings.length; i++) {
 			$scope.markers.push(createMarker(i, vm.buildings[i]));
-			$scope.safeBuildings.push(vm.buildings[i]);
+			//$scope.safeBuildings.push(vm.buildings[i]);
 		}
 
 	}).catch(function() {

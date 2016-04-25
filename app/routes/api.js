@@ -29,6 +29,15 @@ module.exports = function(app, express) {
 		});
 	});
 
+	apiRouter.get('/historic/:bid', function(req, res) {
+		Building.find({ bid: req.params.bid }, function(err, floors) {
+			if (err) res.send(err);
+			console.log("Building Data")
+			// return floors
+			res.json(10);
+		});
+	});
+
 	// proxy api requests to rnoc via vpn so the app can get results without being on the gatech network
 	apiRouter.get('/proxy', function(req, res) {
 		var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count?details=true';
