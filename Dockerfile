@@ -14,6 +14,7 @@ RUN bower install --allow-root
 ADD server.js gulpfile.js config.js ./
 ADD app ./app
 ADD public ./public
+RUN gulp minify
 
 EXPOSE 8080
 COPY password.txt run.sh ./
