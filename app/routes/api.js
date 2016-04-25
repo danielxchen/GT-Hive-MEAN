@@ -35,6 +35,11 @@ module.exports = function(app, express) {
 		History.findOne({bid: req.params.bid }, function(err, history) {
 			if (err) return handleError(err);
 
+			if (history == null) {
+				res.sendStatus(404);
+				return;
+			}
+
 			var totals = {};
 			var counts = {};
 
