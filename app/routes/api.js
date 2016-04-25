@@ -34,7 +34,7 @@ module.exports = function(app, express) {
 			if (err) res.send(err);
 			console.log("Building Data")
 			// return floors
-			res.json(10);
+			res.json([4,6,1,9,20,30,5,12,14,45,9,20,10,12,10,45,23,09,32,12,34,67,12,23]);
 		});
 	});
 
