@@ -135,20 +135,26 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	  		return JSON.parse(res.body);
 
 	  	}).then(function(parsed) {
-	  // 		// Update the historical data
-	  // 		History.findOne({ bid: bid }, function (err, building) {
-	  // 			if (err) return handleError(err);
+	  		// Update the historical data
+	  		History.findOne({ bid: bid }, function (err, history) {
+	  			if (err) return handleError(err);
 
-	  // 			building.history.push({ occupancy: parsed.clientcount });
+	  			if (history == null) {
+	  				console.log("history not found for id", bid);
+	  				history = new History();
+	  				history.bid = bid;
+	  			}
 
-	  // 			building.save(function (err) {
-  	// 				if (err) return handleError(err)
-  	// 				console.log(bid, 'history updated!');
-			// 	});
+	  			history.history.push({ occupancy: parsed.clientcount });
 
-			// });
+	  			history.save(function (err) {
+  					if (err) return handleError(err)
+  					console.log(bid, 'history updated!');
+				});
+
+			});
+
 	  		return parsed;
-
 	  	}).then(function(parsed) {
 	  		// Update the building's occupancy
 	  		return Building.findOneAndUpdateAsync({ bid: bid }, { $set: { occupancy: parsed.clientcount } }, { new: true, upsert: true });
