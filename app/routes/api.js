@@ -91,6 +91,26 @@ module.exports = function(app, express) {
 		});
 	});
 
+    apiRouter.get('/timeseries/:bid', function(req, res) {
+        History.findOne({bid: req.params.bid }, function(err, history) {
+            if (err) return handleError(err);
+
+			if (history == null) {
+				res.sendStatus(404);
+				return;
+			}
+
+			var totals = {};
+
+                var data = [];
+                history.history.forEach(function(val) {
+                    data.push({date: val.createdAt, occupancy: val.occupancy})
+                });
+
+                res.json(data);
+        });
+    });
+
 	// proxy api requests to rnoc via vpn so the app can get results without being on the gatech network
 	apiRouter.get('/proxy', function(req, res) {
 		var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count?details=true';
