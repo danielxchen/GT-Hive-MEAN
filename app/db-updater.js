@@ -129,8 +129,14 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 
 
 	function update_building(bid, callback) {
+		// leading zero for double-digit building ids or else rnoc api won't work
+		var strBid = bid.toString();
+		if (strBid.length == 2) {
+			strBid = "0" + strBid;
+		}
+
 		// Get the current occupancy of the building 
-	  	request.getAsync(url + bid).then(function(res) {
+	  	request.getAsync(url + strBid).then(function(res) {
 	  		// Parse the response into JSON
 	  		return JSON.parse(res.body);
 
@@ -157,7 +163,7 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	  		return parsed;
 	  	}).then(function(parsed) {
 	  		// Update the building's occupancy
-	  		return Building.findOneAndUpdateAsync({ bid: bid }, { $set: { occupancy: parsed.clientcount } }, { new: true, upsert: true });
+	  		return Building.findOneAndUpdateAsync({ bid: bid }, { $set: { occupancy: parsed.clientcount } }, { new: true });
 
 	  	}).then(function(doc) {
 	  		// We got the updated document

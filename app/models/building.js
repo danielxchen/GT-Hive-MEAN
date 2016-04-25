@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var BuildingSchema = new Schema({
 	name: String,
 	abbreviation: String,
-	bid: Number,
+	bid: String,
 	occupancy: Number,
 	capacity: Number,
 	latitude: Number,
