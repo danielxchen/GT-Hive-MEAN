@@ -18,5 +18,9 @@ angular.module('buildingService', [])
 		return $http.get('/api/graphdata/' + bid);
 	};
 
+	buildingFactory.getFloors = function(bid) {
+		return $http.get('/api/buildings/' + bid);
+	}
+
 	return buildingFactory;
 });

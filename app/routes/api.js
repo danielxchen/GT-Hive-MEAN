@@ -23,6 +23,7 @@ module.exports = function(app, express) {
 	// Routes that end in /buildings/:bid
 	// Get the floors of the building with that bid
 	apiRouter.get('/buildings/:bid', function(req, res) {
+		console.log('floors requested');
 		Floor.find({ bid: req.params.bid }, function(err, floors) {
 			if (err) res.send(err);
 

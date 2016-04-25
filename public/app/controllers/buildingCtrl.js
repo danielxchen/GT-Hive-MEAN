@@ -7,8 +7,20 @@ angular.module('buildingCtrl', ['buildingService', 'chart.js'])
 
     $scope.data = [];
 
+    $scope.safeFloors = [];
+
     Building.graphdata($routeParams.bid).then(function(res) {
         console.log("got graph data for bid=", $routeParams.bid);
         $scope.data = [res.data.averages, res.data.today];
+    });
+
+    Building.getFloors($routeParams.bid).then(function(res) {
+        var floors = [];
+
+        res.data.forEach(function(floor) {
+            floors.push({name: "Floor " + floor.floor, occupancy: floor.occupancy});
+        });
+
+        $scope.safeFloors = floors;
     });
 });
