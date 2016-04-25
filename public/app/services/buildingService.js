@@ -14,5 +14,9 @@ angular.module('buildingService', [])
 		return $http.get('/api/buildings/' + bid);
 	};
 
+	buildingFactory.chartData = function(bid) {
+		return $http.get('/api/chartdata/' + bid);
+	}
+
 	return buildingFactory;
 });
