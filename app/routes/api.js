@@ -4,6 +4,7 @@ var Floor = require('../models/floor');
 var Promise = require('bluebird');
 var request = Promise.promisifyAll(require('request'));
 var History = require('../models/history');
+var moment = require('moment');
 
 module.exports = function(app, express) {
 
@@ -30,26 +31,44 @@ module.exports = function(app, express) {
 		});
 	});
 
-	apiRouter.get('/historic/:bid', function(req, res) {
-		Building.find({ bid: req.params.bid }, function(err, floors) {
-			if (err) res.send(err);
-			console.log("Building Data")
-			// return floors
-			res.json([4,6,1,9,20,30,5,12,14,45,9,20,10,12,10,45,23,09,32,12,34,67,12,23]);
-		});
-	});
-
-	apiRouter.get('/timeseries/:bid', function(req, res) {
+	apiRouter.get('/graphdata/:bid', function(req, res) {
 		History.findOne({bid: req.params.bid }, function(err, history) {
 			if (err) return handleError(err);
 
-			var data = [];
+			var totals = {};
+			var counts = {};
+			var averages = [];
+
+			var lowerBound = moment().startOf('day');
+			var upperBound = moment().endOf('day');
+
+			var entries = [];
 			history.history.forEach(function(val) {
-				// console.log(val);
-				data.push({date: val.createdAt, occupancy: val.occupancy})
+				var date = moment(val.createdAt);
+
+				var nearestHour = date.startOf('hour').hours();
+
+				if (!(nearestHour in totals)) {
+					totals[nearestHour] = 0;
+					counts[nearestHour] = 0;
+				}
+				totals[nearestHour] += val.occupancy;
+				counts[nearestHour] += 1;
+
+				if (lowerBound.isBefore(date) && date.isBefore(upperBound)) {
+					entries.push({date: date, occupancy: val.occupancy})
+				}
 			});
 
-			res.json(data);
+			for (var i = 0; i < 24; i++) {
+				if (i in totals) {
+					averages.push(Math.round(totals[i] / counts[i]));
+				} else {
+					averages.push(0);
+				}
+			}
+
+			res.json({today: entries, averages: averages});
 		});
 	});
 
