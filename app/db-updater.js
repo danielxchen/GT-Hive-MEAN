@@ -198,7 +198,7 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	queue.drain = function() {
 		console.log("Done updating buildings");
 	};
-	queue.push(bids); //TODO(justin): uncomment
+	queue.push(bids);
 
 
 	function update_floors() {
