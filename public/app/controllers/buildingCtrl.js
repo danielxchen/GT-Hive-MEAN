@@ -5,15 +5,15 @@ angular.module('buildingCtrl', ['buildingService', 'chart.js'])
     $scope.series = ['Average', 'Today'];
     $scope.legend = true;
 
+    // initialize graph to be empty, then update via async request
     $scope.data = [];
-
-    $scope.safeFloors = [];
-
     Building.graphdata($routeParams.bid).then(function(res) {
         console.log("got graph data for bid=", $routeParams.bid);
         $scope.data = [res.data.averages, res.data.today];
     });
 
+    // initialize floor table to be empty, then update it via async request
+    $scope.safeFloors = [];
     Building.getFloors($routeParams.bid).then(function(res) {
         var floors = [];
 

@@ -201,6 +201,7 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	queue.push(bids);
 
 
+	// pull from rnoc's detailed api to get a list of all access points and their number of clients
 	function update_floors() {
 		request.getAsync(url + '?details=true').then(function(res) {
 			return JSON.parse(res.body);
@@ -234,8 +235,6 @@ module.exports = new CronJob('0 */5 * * * *', function() {
                     }
                 }
             }
-
-            console.log(floorData);
 
 		});
 	}

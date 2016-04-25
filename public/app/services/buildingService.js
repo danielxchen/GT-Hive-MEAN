@@ -9,11 +9,6 @@ angular.module('buildingService', [])
 		return $http.get('/api/buildings');
 	};
 
-	// Get a single building
-	buildingFactory.get = function(bid) {
-		return $http.get('/api/buildings/' + bid);
-	};
-
 	buildingFactory.graphdata = function(bid) {
 		return $http.get('/api/graphdata/' + bid);
 	};

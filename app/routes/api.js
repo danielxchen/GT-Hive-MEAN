@@ -32,6 +32,8 @@ module.exports = function(app, express) {
 		});
 	});
 
+	// returns {today: [], averages: []} where each contained array contains 24
+	// data points - one corresponding to each hour of the day
 	apiRouter.get('/graphdata/:bid', function(req, res) {
 		History.findOne({bid: req.params.bid }, function(err, history) {
 			if (err) return handleError(err);
@@ -41,18 +43,22 @@ module.exports = function(app, express) {
 				return;
 			}
 
+			// keep track of counts and number of values to calculate averages
 			var totals = {};
 			var counts = {};
 
 			// values indexed by hour (0-23)
 			var todayEntries = {};
 
+			// the beginning and end of today
 			var lowerBound = moment().startOf('day');
 			var upperBound = moment().endOf('day');
 
+			// tally up total counts for each data point we have
 			history.history.forEach(function(val) {
 				var date = moment(val.createdAt);
 
+				// round to the nearest hour
 				var nearestHour = date.startOf('hour').hours();
 
 				if (!(nearestHour in totals)) {
@@ -62,6 +68,7 @@ module.exports = function(app, express) {
 				totals[nearestHour] += val.occupancy;
 				counts[nearestHour] += 1;
 
+				// make sure date is today
 				if (lowerBound.isBefore(date) && date.isBefore(upperBound)) {
 					if (!(nearestHour in todayEntries)) {
 						todayEntries[nearestHour] = val.occupancy;
@@ -72,6 +79,7 @@ module.exports = function(app, express) {
 			var averages = [];
 			var today = [];
 
+			// calculate averages from counts
 			for (var i = 0; i < 24; i++) {
 				if (i in totals) {
 					averages.push(Math.round(totals[i] / counts[i]));
@@ -87,11 +95,11 @@ module.exports = function(app, express) {
 			}
 
 
-
 			res.json({today: today, averages: averages});
 		});
 	});
 
+	// returns a list of all occupancy data points we have in the database for a given building
     apiRouter.get('/timeseries/:bid', function(req, res) {
         History.findOne({bid: req.params.bid }, function(err, history) {
             if (err) return handleError(err);
