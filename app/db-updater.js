@@ -8,6 +8,7 @@ Promise.promisifyAll(Building.prototype);
 var History = require('./models/history');
 Promise.promisifyAll(History);
 Promise.promisifyAll(History.prototype);
+var sleep = require('sleep');
 
 module.exports = new CronJob('0 */5 * * * *', function() {
 	console.log('Job Starting');
@@ -127,6 +128,10 @@ module.exports = new CronJob('0 */5 * * * *', function() {
 	var url = 'http://wifi.dssg.rnoc.gatech.edu:3000/api/count/building_id=';
 
 	bids.forEach(function(bid) {
+		// slight pause to keep the number of simultaneous connections smaller
+		// the rnoc server can't handle that many
+		sleep.sleep(3);
+
 		// Get the current occupancy of the building 
 	  	request.getAsync(url + bid).then(function(res) {
 	  		// Parse the response into JSON
