@@ -6,13 +6,12 @@
   },
   "main": "server.js",
   "dependencies": {
-    "angular-smart-table": "~2.1.8",
     "bluebird": "^3.1.1",
     "cron": "^1.1.0",
     "express": "^4.13.3",
     "mongoose": "^4.2.8",
     "request": "^2.67.0",
-    "sleep": "^3.0.1"
+    "angular-smart-table": "~2.1.8"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
