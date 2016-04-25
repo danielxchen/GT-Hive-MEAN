@@ -88,9 +88,9 @@ angular.module('mainCtrl', ['uiGmapgoogle-maps', 'buildingService'])
 			};
 
 			// Set color
-			if (building.occupancy <= 40)
+			if (building.occupancy <= (building.capacity * 0.4))
 				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-			else if (building.occupancy <= 80)
+			else if (building.occupancy <= (building.capacity * 0.8))
 				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
 			else
 				marker.icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
