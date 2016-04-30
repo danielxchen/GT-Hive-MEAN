@@ -36,7 +36,11 @@ module.exports = function(app, express) {
 	// data points - one corresponding to each hour of the day
 	apiRouter.get('/graphdata/:bid', function(req, res) {
 		History.findOne({bid: req.params.bid }, function(err, history) {
-			if (err) return handleError(err);
+			if (err) {
+				// if (err) return handleError(err);
+				res.sendStatus(500);
+				return;
+			}
 
 			if (history == null) {
 				res.sendStatus(404);
